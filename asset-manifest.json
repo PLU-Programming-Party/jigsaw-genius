@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/jigsaw-genius/static/css/main.073c9b0a.css",
+    "main.js": "/jigsaw-genius/static/js/main.d699260f.js",
+    "static/js/787.bbf89c04.chunk.js": "/jigsaw-genius/static/js/787.bbf89c04.chunk.js",
+    "static/media/logo.svg": "/jigsaw-genius/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/jigsaw-genius/index.html",
+    "main.073c9b0a.css.map": "/jigsaw-genius/static/css/main.073c9b0a.css.map",
+    "main.d699260f.js.map": "/jigsaw-genius/static/js/main.d699260f.js.map",
+    "787.bbf89c04.chunk.js.map": "/jigsaw-genius/static/js/787.bbf89c04.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.d699260f.js"
+  ]
+}

@@ -8,11 +8,13 @@ interface PuzzleCamProps {
     cameraWidth: number,
     buttonText: string,
     buttonHandler: Function,
-    title: string
+    title: string,
+    backgroundImage?: any
 }
 
 function PuzzleCam({cameraHeight, cameraWidth, buttonText, buttonHandler, title}: PuzzleCamProps){
-    const videoRef = useRef<any>(null)
+    const photoRef = useRef<any>(null);
+    const videoRef = useRef<any>(null);
 
     // Display camera
     const getVideo = () =>{
@@ -49,6 +51,16 @@ function PuzzleCam({cameraHeight, cameraWidth, buttonText, buttonHandler, title}
         getVideo();
     }, [videoRef])
 
+    const takePhoto = () => {
+        let photo = photoRef.current;
+        let ctx = photo.getContext('2d');
+
+        ctx.drawImage(videoRef.current, 0, 0, photo.width, photo.height);
+        let dataUrl = photo.toDataURL();
+        let image = new Image();
+        image.src = dataUrl;
+    }
+
     return (
         <div>
             <p> {title} </p>
@@ -57,7 +69,11 @@ function PuzzleCam({cameraHeight, cameraWidth, buttonText, buttonHandler, title}
                 <video id="camera" ref={videoRef}></video>
             </div>
 
-            <button className="submit"> {buttonText} </button>
+            <div>
+                <canvas ref={photoRef} width="360" height="360"></canvas>
+            </div>
+            
+            <button className="submit" onClick={takePhoto}> {buttonText} </button>
            
         </div>
     )

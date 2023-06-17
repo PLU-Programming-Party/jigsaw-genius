@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
         <h2 id="title"> Jigsaw Genius</h2>
-        <SolvedPage backgroundImage='' puzzlePieceImage=''/>
+        <PuzzleCam cameraHeight={360} cameraWidth={360} buttonText={"submit"} title={"The title"} buttonHandler={() => console.log("log")}/>
     </div>
   );
 }

@@ -18,8 +18,15 @@ function PuzzleCam(){
             let video = videoRef.current;
             if (video != null){
                 video.srcObject = stream;
-                video.play();
-                
+                let videoPromise = video.play();
+                if (videoPromise !== undefined) {
+                    videoPromise.then((_:any) => {
+                        console.log("Safely playing video");
+                    })
+                    .catch((error: any) => {
+                      console.log("Succesfully catch video error");
+                    });
+                  }
             } else{
                 console.log("video is null")
             }

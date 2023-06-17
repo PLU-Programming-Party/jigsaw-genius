@@ -2,15 +2,24 @@ import React from 'react';
 import "./PuzzleCam.css";
 import { useEffect, useRef } from "react";
 
-function PuzzleCam(){
+
+interface PuzzleCamProps {
+    cameraHeight: number,
+    cameraWidth: number,
+    buttonText: string,
+    buttonHandler: Function,
+    title: string
+}
+
+function PuzzleCam({cameraHeight, cameraWidth, buttonText, buttonHandler, title}: PuzzleCamProps){
     const videoRef = useRef<any>(null)
 
     // Display camera
     const getVideo = () =>{
         navigator.mediaDevices
         .getUserMedia({video: {
-            width: { min: 120, ideal: 360, max: 1920 },
-            height: { min: 120, ideal: 360, max: 1080 },
+            width: { min: 120, ideal: cameraWidth, max: 1920 },
+            height: { min: 120, ideal: cameraHeight, max: 1080 },
             facingMode: 'environment'
           }
         })
@@ -42,13 +51,13 @@ function PuzzleCam(){
 
     return (
         <div>
-            <p> Align the puzzle reference photo inside the box </p>
+            <p> {title} </p>
             
             <div id="vid-cam" >
                 <video id="camera" ref={videoRef}></video>
             </div>
 
-            <button className="submit"> Submit </button>
+            <button className="submit"> {buttonText} </button>
            
         </div>
     )

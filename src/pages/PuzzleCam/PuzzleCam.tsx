@@ -1,6 +1,6 @@
 import React from 'react';
-import "../styling/PuzzleCam.css";
-import { useState, useEffect, useRef } from "react";
+import "./PuzzleCam.css";
+import { useEffect, useRef } from "react";
 
 function PuzzleCam(){
     const videoRef = useRef<any>(null)

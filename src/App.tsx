@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import PuzzleCam from './components/PuzzleCam';
+import PuzzleCam from './pages/PuzzleCam/PuzzleCam';
 
 function App() {
   return (

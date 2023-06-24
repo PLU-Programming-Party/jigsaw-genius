@@ -18,8 +18,8 @@ function App() {
     navigator.mediaDevices
       .getUserMedia({
         video: {
-          width: { min: 120, ideal: 100, max: 1920 },
-          height: { min: 120, ideal: 100, max: 1080 },
+          // width: { min: 120, ideal: 100, max: 1920 },
+          // height: { min: 120, ideal: 100, max: 1080 },
           facingMode: "environment",
         },
       })
@@ -74,7 +74,13 @@ function App() {
       let ctx = photo.getContext("2d");
       console.log(photo);
 
-      ctx.drawImage(pieceVideoRef.current, 0, 0, photo.width, photo.height);
+      ctx.drawImage(
+        fullPuzzleVideoRef.current,
+        0,
+        0,
+        photo.width,
+        photo.height
+      );
       let dataUrl = photo.toDataURL();
       let image = new Image();
       image.src = dataUrl;
@@ -83,24 +89,41 @@ function App() {
   };
 
   const revertBack = () => {
-    setPuzzlePhotoTaken(false);
+    if (piecePhotoTaken) {
+      setPiecePhotoTaken(false);
+    } else if (puzzlePhotoTaken) {
+      setPuzzlePhotoTaken(false);
+    }
     setButtonImage(puzzle);
     getVideo();
   };
+
+  function videoClass() {
+    if (puzzlePhotoTaken && !piecePhotoTaken) {
+      return "show";
+    } else if (puzzlePhotoTaken && piecePhotoTaken) {
+      return "hide";
+    } else {
+      return "";
+    }
+  }
+
+  function photoTakenClass() {
+    if (puzzlePhotoTaken && piecePhotoTaken) {
+      return "hide";
+    } else {
+      return "";
+    }
+  }
 
   return (
     <>
       <canvas
         id="piecePhoto"
-        className={piecePhotoTaken ? "" : "hide"}
+        className={piecePhotoTaken && puzzlePhotoTaken ? "" : "hide"}
         ref={piecePhotoRef}
       ></canvas>
 
-      <video
-        id="puzzlePieceVideo"
-        className={puzzlePhotoTaken ? "" : "hide"}
-        ref={pieceVideoRef}
-      ></video>
       <canvas
         id="fullPuzzlePhoto"
         className={puzzlePhotoTaken ? "" : "hide"}
@@ -108,13 +131,17 @@ function App() {
       ></canvas>
       <video
         id="fullPuzzleVideo"
-        className={puzzlePhotoTaken ? "hide" : ""}
+        className={videoClass()}
         ref={fullPuzzleVideoRef}
       ></video>
 
       <div id="spacePlacer"></div>
 
-      <button id="fullPuzzleButton" onClick={takePhoto}>
+      <button
+        id="fullPuzzleButton"
+        onClick={takePhoto}
+        className={photoTakenClass()}
+      >
         <input id="buttonImage" type="image" src={buttonImage} />
       </button>
 

@@ -118,6 +118,14 @@ function App() {
     }
   }
 
+  function getVideoID() {
+    if (puzzlePhotoTaken && !piecePhotoTaken) {
+      return "piecePuzzleVideo";
+    } else {
+      return "fullPuzzleVideo";
+    }
+  }
+
   return (
     <>
       <canvas
@@ -132,7 +140,7 @@ function App() {
         ref={fullPuzzlePhotoRef}
       ></canvas>
       <video
-        id="fullPuzzleVideo"
+        id={getVideoID()}
         className={videoClass()}
         ref={fullPuzzleVideoRef}
       ></video>

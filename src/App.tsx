@@ -91,10 +91,12 @@ function App() {
   const revertBack = () => {
     if (piecePhotoTaken) {
       setPiecePhotoTaken(false);
+      setButtonImage(piece);
     } else if (puzzlePhotoTaken) {
       setPuzzlePhotoTaken(false);
+      setButtonImage(puzzle);
     }
-    setButtonImage(puzzle);
+
     getVideo();
   };
 

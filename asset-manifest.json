@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/jigsaw-genius/static/css/main.0f15a70f.css",
-    "main.js": "/jigsaw-genius/static/js/main.553b8029.js",
+    "main.css": "/jigsaw-genius/static/css/main.10ff9627.css",
+    "main.js": "/jigsaw-genius/static/js/main.090d2a0e.js",
     "static/js/787.bbf89c04.chunk.js": "/jigsaw-genius/static/js/787.bbf89c04.chunk.js",
     "index.html": "/jigsaw-genius/index.html",
-    "main.0f15a70f.css.map": "/jigsaw-genius/static/css/main.0f15a70f.css.map",
-    "main.553b8029.js.map": "/jigsaw-genius/static/js/main.553b8029.js.map",
+    "main.10ff9627.css.map": "/jigsaw-genius/static/css/main.10ff9627.css.map",
+    "main.090d2a0e.js.map": "/jigsaw-genius/static/js/main.090d2a0e.js.map",
     "787.bbf89c04.chunk.js.map": "/jigsaw-genius/static/js/787.bbf89c04.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0f15a70f.css",
-    "static/js/main.553b8029.js"
+    "static/css/main.10ff9627.css",
+    "static/js/main.090d2a0e.js"
   ]
 }

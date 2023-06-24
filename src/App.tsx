@@ -8,6 +8,7 @@ function App() {
   const fullPuzzlePhotoRef = useRef<any>(null);
   const piecePhotoRef = useRef<any>(null);
   const fullPuzzleVideoRef = useRef<any>(null);
+  const pieceVideoRef = useRef<any>(null);
   const [puzzlePhotoTaken, setPuzzlePhotoTaken] = useState<boolean>(false);
   const [piecePhotoTaken, setPiecePhotoTaken] = useState<boolean>(false);
   const [buttonImage, setButtonImage] = useState<any>(puzzle);
@@ -49,26 +50,57 @@ function App() {
     getVideo();
   }, []);
 
-  const takePhoto = () => {
-    let photo = fullPuzzlePhotoRef.current;
-    let ctx = photo.getContext("2d");
+  const takePhoto = (e: any) => {
+    if (!puzzlePhotoTaken) {
+      let photo = fullPuzzlePhotoRef.current;
+      let ctx = photo.getContext("2d");
+      console.log(photo);
 
-    ctx.drawImage(fullPuzzleVideoRef.current, 0, 0, photo.width, photo.height);
-    let dataUrl = photo.toDataURL();
-    let image = new Image();
-    image.src = dataUrl;
+      ctx.drawImage(
+        fullPuzzleVideoRef.current,
+        0,
+        0,
+        photo.width,
+        photo.height
+      );
+      let dataUrl = photo.toDataURL();
+      let image = new Image();
+      image.src = dataUrl;
 
-    setPuzzlePhotoTaken(true);
-    setButtonImage(piece);
+      setPuzzlePhotoTaken(true);
+      setButtonImage(piece);
+    } else {
+      let photo = piecePhotoRef.current;
+      let ctx = photo.getContext("2d");
+      console.log(photo);
+
+      ctx.drawImage(pieceVideoRef.current, 0, 0, photo.width, photo.height);
+      let dataUrl = photo.toDataURL();
+      let image = new Image();
+      image.src = dataUrl;
+      setPiecePhotoTaken(true);
+    }
   };
 
   const revertBack = () => {
     setPuzzlePhotoTaken(false);
+    setButtonImage(puzzle);
     getVideo();
   };
 
   return (
     <>
+      <canvas
+        id="piecePhoto"
+        className={piecePhotoTaken ? "" : "hide"}
+        ref={piecePhotoRef}
+      ></canvas>
+
+      <video
+        id="puzzlePieceVideo"
+        className={puzzlePhotoTaken ? "" : "hide"}
+        ref={pieceVideoRef}
+      ></video>
       <canvas
         id="fullPuzzlePhoto"
         className={puzzlePhotoTaken ? "" : "hide"}
@@ -81,6 +113,7 @@ function App() {
       ></video>
 
       <div id="spacePlacer"></div>
+
       <button id="fullPuzzleButton" onClick={takePhoto}>
         <input id="buttonImage" type="image" src={buttonImage} />
       </button>

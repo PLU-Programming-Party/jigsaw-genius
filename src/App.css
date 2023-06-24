@@ -5,13 +5,17 @@
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
+  z-index: 1;
 }
 
-
-#puzzlePieceVideo{
-  align-self: center;
-  min-width: 20%;
-  min-height: 20%;
+#piecePhoto,
+#puzzlePieceVideo {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  max-width: 20%;
+  max-height: 20%;
+  z-index: 20;
 }
 
 #fullPuzzleButton {

@@ -3,6 +3,7 @@ import "./App.css";
 import puzzle from "./assets/puzzle.png";
 import piece from "./assets/piece.png";
 import back from "./assets/back.png";
+import detector from "./utils/detector";
 
 function App() {
   const fullPuzzlePhotoRef = useRef<any>(null);
@@ -12,6 +13,8 @@ function App() {
   const [puzzlePhotoTaken, setPuzzlePhotoTaken] = useState<boolean>(false);
   const [piecePhotoTaken, setPiecePhotoTaken] = useState<boolean>(false);
   const [buttonImage, setButtonImage] = useState<any>(puzzle);
+  const [fullPhotoArray, setFullPhotoArray] = useState<any[][]>();
+  const [piecePhotooArray, setPiecePhotoArray] = useState<any[][]>();
 
   // Display camera
   const getVideo = () => {
@@ -54,7 +57,6 @@ function App() {
     if (!puzzlePhotoTaken) {
       let photo = fullPuzzlePhotoRef.current;
       let ctx = photo.getContext("2d");
-      console.log(photo);
 
       ctx.drawImage(
         fullPuzzleVideoRef.current,
@@ -66,26 +68,41 @@ function App() {
       let dataUrl = photo.toDataURL();
       let image = new Image();
       image.src = dataUrl;
-
+      let data = ctx.getImageData(0, 0, photo.width, photo.height);
+      setFullPhotoArray(buildRgb(data.data));
       setPuzzlePhotoTaken(true);
       setButtonImage(piece);
     } else {
-      let photo = piecePhotoRef.current;
+      let photo = fullPuzzlePhotoRef.current;
       let ctx = photo.getContext("2d");
-      console.log(photo);
 
       ctx.drawImage(
-        fullPuzzleVideoRef.current,
-        0,
-        0,
-        photo.width,
-        photo.height
+        photo,
+        100,
+        100,
+        100,
+        100,
+        0, 0,
+        100, 100
       );
       let dataUrl = photo.toDataURL();
       let image = new Image();
       image.src = dataUrl;
+      let data = ctx.getImageData(0, 0, 100, 100);
+      setPiecePhotoArray(buildRgb(data.data));
       setPiecePhotoTaken(true);
+
+      console.log(detector(fullPhotoArray, buildRgb(data.data) ));
     }
+  };
+
+  const buildRgb = (imageData: any) => {
+    const rgbValues = [];
+    for (let i = 0; i < imageData.length; i += 4) {
+      const rgb = [imageData[i], imageData[i+1], imageData[i+2]];
+      rgbValues.push(rgb);
+    }
+    return rgbValues;
   };
 
   const revertBack = () => {
